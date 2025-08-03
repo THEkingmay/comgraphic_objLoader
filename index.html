@@ -35,7 +35,7 @@
             0.1,
             1000
         );
-        camera.position.set(0, 2, 5);
+        camera.position.set(0, 4, 7);
         camera.lookAt(0, 0, 0);
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
         // ✅ Directional Light ที่สร้างเงา
@@ -77,11 +77,40 @@
                     child.receiveShadow = true;
                 }
             });
+            object.position.z=-2
             scene.add(object);
         }, undefined, function (error) {
             console.error('Error loading OBJ:', error);
         });
-
+        loader.load('https://raw.githubusercontent.com/THEkingmay/comgraphic_objLoader/refs/heads/main/chair.obj', 
+        function (object) {
+            // ตั้งค่า castShadow กับทุก mesh ใน object
+            object.traverse(function (child) {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            });
+            object.position.z=4
+            scene.add(object);
+        }, undefined, function (error) {
+            console.error('Error loading OBJ:', error);
+        });
+        loader.load('https://sibsansuk.github.io/myModel.obj', 
+        function (object) {
+            // ตั้งค่า castShadow กับทุก mesh ใน object
+            object.traverse(function (child) {
+                if (child.isMesh) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            });
+            object.position.z=3
+            object.position.x=2
+            scene.add(object);
+        }, undefined, function (error) {
+            console.error('Error loading OBJ:', error);
+        });
         // ✅ render loop
         function animate(t) {
 
